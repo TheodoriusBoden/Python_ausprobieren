@@ -35,7 +35,7 @@ while True:
         cropped_face = frame[max(last_faces[1]-round(last_faces[3]*cropp_factor_h), 0) : min(last_faces[1]+last_faces[3]+round(last_faces[3]*cropp_factor_h), frame_h),   max(last_faces[0]-round(last_faces[2]*cropp_factor_w), 0) : min(last_faces[0]+last_faces[2]+round(last_faces[2]*cropp_factor_w), frame_w)]
         print(last_faces)
         print("cropped last_face")
-    face_zoom =cv2.resize(cropped_face, (1050, 750))
+    face_zoom =cv2.resize(cropped_face, (frame_w, round(frame_w * 3/4)))
     print("resized cropped_face")
     cv2.imshow("Gesicht", face_zoom)
 
