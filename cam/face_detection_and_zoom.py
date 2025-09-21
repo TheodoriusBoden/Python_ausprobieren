@@ -8,6 +8,11 @@ camera = cv2.VideoCapture(0)
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
+last_faces = (0, 0, 250, 350)
+
+cropp_factor_w = 0.7
+cropp_factor_h = 0.5
+
 while True:
     ret, frame = camera.read()
     if not ret:
@@ -22,12 +27,17 @@ while True:
 
     if len(faces) > 0:
         (x, y, w, h) = faces[0]
-        cropped_face = frame[max(y-round(h/3), 0) : min(y+h+round(h/3), frame_h),   max(x-round(w/1.5), 0) : min(x+w+round(w/1.5), frame_w)]
-        face_zoom =cv2.resize(cropped_face, (frame_w, frame_h))
-        cv2.imshow("Gesicht", face_zoom)
+        last_faces = (x, y, w, h)
+        cropped_face = frame[max(y-round(h*cropp_factor_h), 0) : min(y+h+round(h*cropp_factor_h), frame_h),   max(x-round(w*cropp_factor_w), 0) : min(x+w+round(w*cropp_factor_w), frame_w)]
+        print("face detected and cropped")
     else:
-        cv2.imshow("Gesicht", frame)
-
+        print("no face detected")
+        cropped_face = frame[max(last_faces[1]-round(last_faces[3]*cropp_factor_h), 0) : min(last_faces[1]+last_faces[3]+round(last_faces[3]*cropp_factor_h), frame_h),   max(last_faces[0]-round(last_faces[2]*cropp_factor_w), 0) : min(last_faces[0]+last_faces[2]+round(last_faces[2]*cropp_factor_w), frame_w)]
+        print(last_faces)
+        print("cropped last_face")
+    face_zoom =cv2.resize(cropped_face, (1050, 750))
+    print("resized cropped_face")
+    cv2.imshow("Gesicht", face_zoom)
 
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 1)
