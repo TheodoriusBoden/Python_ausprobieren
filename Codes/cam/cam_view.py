@@ -2,7 +2,7 @@ print("start")
 
 import cv2
 
-camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture("/dev/video2")
 
 while True:
     ret, frame = camera.read()
