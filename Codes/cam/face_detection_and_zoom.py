@@ -2,7 +2,7 @@ print("start")
 
 import cv2
 
-camera = cv2.VideoCapture("/dev/video2")
+camera = cv2.VideoCapture("/dev/video1")
 #camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 #camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 
