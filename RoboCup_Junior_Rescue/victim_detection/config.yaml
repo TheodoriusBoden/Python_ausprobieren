@@ -1,0 +1,9 @@
+path: /home/ag/Dokumente/GitHub/Python_ausprobieren/RoboCup_Junior_Rescue_Line/victim_detection/data
+train: images/train
+val: images/train
+
+# Classes
+
+names:
+  0: dead_victim
+  1: alive_victim
